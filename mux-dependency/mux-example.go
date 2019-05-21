@@ -1,4 +1,4 @@
-package mux_dependency
+package main
 
 import (
 	"encoding/json"
@@ -56,6 +56,7 @@ func CreatePersonEndpoint(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+// Metodo para eliminar
 func DeletePersonEndpoint(w http.ResponseWriter, req *http.Request) {
 	params := mux.Vars(req)
 	for index, item := range people {
