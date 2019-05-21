@@ -10,7 +10,7 @@ import (
 
 func main() {
 	sess, err := session.NewSession(&aws.Config{
-		Credentials: credentials.NewStaticCredentials("AKIAJXULSU247S3IHMDQ", "jYzvb/AJDmNAcjxNW+w3EcttJjL/hbu2ShbjBNzx", ""),
+		Credentials: credentials.NewStaticCredentials("id", "secret", ""),
 		Region:      aws.String("us-west-2"),
 	})
 
