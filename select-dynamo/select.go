@@ -5,8 +5,15 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 	"log"
 )
+
+type tableDemo struct {
+	Id               int
+	Nombre           string
+	NombreSecundario string `dynamodbav:"nombre_secundario"`
+}
 
 func main() {
 	sess, err := session.NewSession(&aws.Config{
@@ -30,9 +37,16 @@ func main() {
 
 	}
 
-	log.Println(*(response.Items[0]["id"].N))
-	/*for _, v := range response.Items {
+	for _, v := range response.Items {
 		log.Printf("%s", v)
-	}*/
+		// Parseo
+		item := tableDemo{}
+		err = dynamodbattribute.UnmarshalMap(v, &item)
+
+		if err != nil {
+			log.Fatal("ERROR AL PARSEAR ", err)
+		}
+		log.Printf("Valores %v ", item)
+	}
 
 }
